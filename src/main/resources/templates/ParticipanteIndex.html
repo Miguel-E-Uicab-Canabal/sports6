@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="shards.min.css">
+</head>
+<body>
+    <div>
+    
+    <p><a href="/inicio/">Regresar al menu</a></p>
+    <div th:if="${#lists.isEmpty(Participantes)}">
+    <h2 >No hay participantes registrados todavia!</h2>
+    </div>
+        
+        <div th:if="!${#lists.isEmpty(Participantes)}">
+            <h2>Tabla de participantes</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th	scope="col">Id</th>
+                        <th	scope="col">Nombre</th>
+                        <th	scope="col">Apellido p</th>
+                        <th	scope="col">Apellido m</th>
+                        <th	scope="col">Torneo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="participante : ${Participantes}">
+                    <td scope="row" th:text="${participante.id}"></td>
+                    <td th:text="${participante.nombre}"></td>
+                    <td th:text="${participante.apellidop}"></td>
+                    <td th:text="${participante.apellidom}"></td>
+                    <td th:text="${participante.torneo.nombre}"></td>
+					<td align="left">
+                    	<!--<button type="button" class="btn btn-success btn-squared" th:href="@{cliente/edit{id}(id=${cliente.id})}">Editar</button>-->
+                    	<a class="btn btn-success btn-squared" th:href="@{/participante/edit/{id}(id=${participante.id})}">Editar</a>
+                    	<a class="btn btn-danger btn-squared" th:href="@{/participante/delete/{id}(id=${participante.id})}">Eliminar</a>
+                    	<!--<button type="button" class="btn btn-danger btn-squared" th:href="@{delete/{id}(id=${cliente.id})}">Eliminar</button>-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <p><a href="add">Registrar nuevo participante</a></p>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="shards.min.js"></script>
+</div>
+</body>
+</html>

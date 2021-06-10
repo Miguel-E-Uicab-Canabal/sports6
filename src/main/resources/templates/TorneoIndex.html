@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Getting Started: Serving Web Content</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="shards.min.css">
+</head>
+<body>
+    <div>
+    <p><a href="/inicio/">Regresar al menu</a></p>
+    <div th:if="${#lists.isEmpty(Torneos)}">
+    <h2 >No hay Torneos registrados todavia!</h2>
+    </div>
+        
+        <div th:if="!${#lists.isEmpty(Torneos)}">
+            <h2>Tabla de Torneos</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th	scope="col">Id</th>
+                        <th	scope="col">nombre</th>
+                        <th	scope="col">deporte</th>
+                        <th	scope="col">fecha</th>
+                        <th	scope="col">hora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="torneo : ${Torneos}">
+                    <td scope="row" th:text="${torneo.id}"></td>
+                    <td th:text="${torneo.nombre}"></td>
+                    <td th:text="${torneo.deporte}"></td>
+                    <td th:text="${torneo.fecha}"></td>
+                    <td th:text="${torneo.hora}"></td>
+                    <td align="left">
+                    	<!--<button type="button" class="btn btn-success btn-squared" th:href="@{cliente/edit{id}(id=${cliente.id})}">Editar</button>-->
+                    	<a class="btn btn-success btn-squared" th:href="@{/torneo/edit/{id}(id=${torneo.id})}">Editar</a>
+                    	<a class="btn btn-danger btn-squared" th:href="@{/torneo/delete/{id}(id=${torneo.id})}">Eliminar</a>
+                    	<!--<button type="button" class="btn btn-danger btn-squared" th:href="@{delete/{id}(id=${cliente.id})}">Eliminar</button>-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <p><a href="add">Registrar nuevo torneo</a></p>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="shards.min.js"></script>
+</div>
+</body>
+</html>
